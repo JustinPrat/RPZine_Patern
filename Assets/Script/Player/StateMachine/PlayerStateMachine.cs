@@ -1,10 +1,11 @@
+using Reflex.Attributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    [SerializeField] private Updater _updater;
+    [Inject] private readonly Updater _updater;
     
     [Header("States")]
     [SerializeField] private IdleState _idleState;
