@@ -1,16 +1,14 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateMachine : MonoBehaviour
+[Serializable]
+public class PlayerStateMachine
 {
-    [SerializeField] private Updater _updater;
-    
     [Header("States")]
     [SerializeField] private IdleState _idleState;
-
     
     private StateTypes _currnentStateType;
+    private IPlayerMovement _playerMovementRef;
     private PlayerState _currentState;
     private PlayerState[] _playerStates;
 
@@ -25,28 +23,18 @@ public class PlayerStateMachine : MonoBehaviour
             return _playerStates;
         }
     }
+    public IPlayerMovement PlayerMovementRef => _playerMovementRef;
 
-    private void Awake()
+    public void Init(IPlayerMovement playerMovement)
     {
-        _updater.OnUpdate += StateMachineUpdate;
-
+        _playerMovementRef = playerMovement;
         foreach (PlayerState el in PlayerStates)
         {
             el.Init(this);
         }
-    }
-
-    private void Start()
-    {
         ChangeState(StateTypes.Idle);
     }
-
-
-    private void OnDestroy()
-    {
-        _updater.OnUpdate -= StateMachineUpdate;
-    }
-
+    
     public void ChangeState(StateTypes state)
     {
         _currentState?.OnStateExit(state);
@@ -55,7 +43,7 @@ public class PlayerStateMachine : MonoBehaviour
         _currnentStateType = state; 
     }
 
-    private void StateMachineUpdate()
+    public void StateMachineUpdate()
     {
         if(_currentState == null)
             return;
