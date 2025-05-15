@@ -1,9 +1,12 @@
+using Reflex.Attributes;
 using System;
 using UnityEngine;
 
 [Serializable]
 public class PlayerStateMachine
 {
+    [Inject] private readonly Updater _updater;
+    
     [Header("States")]
     [SerializeField] private IdleState _idleState;
     [SerializeField] private JumpState _jumpState;
