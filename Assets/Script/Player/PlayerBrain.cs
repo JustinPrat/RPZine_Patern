@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerBrain : MonoBehaviour
+public class PlayerBrain : EntityBrain
 {
     [SerializeField] private Updater _updater;
     [SerializeField] private PlayerPhysic _playerPhysic;
