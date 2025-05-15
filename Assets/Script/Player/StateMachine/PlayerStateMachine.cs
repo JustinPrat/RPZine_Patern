@@ -2,8 +2,7 @@ using Reflex.Attributes;
 using System;
 using UnityEngine;
 
-[Serializable]
-public class PlayerStateMachine
+public class PlayerStateMachine : MonoBehaviour
 {
     [Inject] private readonly Updater _updater;
     
@@ -51,7 +50,7 @@ public class PlayerStateMachine
         _currentStateType = state; 
     }
 
-    public void StateMachineUpdate()
+    public void ComputeUpdate()
     {
         if(_currentState == null)
             return;

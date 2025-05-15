@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class PlayerPhysic : MonoBehaviour, IBasicMover
 {
-    [SerializeField] private Updater _updater;
+    [Header("References")]
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private PlayerStateMachine _stateMachine;
-    [SerializeField] private PlayerInputsHandler _inputsHandler;
+    private PlayerInputsHandler _inputsHandler;
 
+    
+    [Header("Metric")]
     [SerializeField] private float _rotationSpeed;
-
+        
     private Vector2 _lookDirection;
     private Vector2 _inputDirection;
-    
+    private Vector2 _lastNonNullDirection;
 
     public event Action OnJumpInputPressed;
     
@@ -30,35 +31,25 @@ public class PlayerPhysic : MonoBehaviour, IBasicMover
         get => _inputDirection;
         set => _inputDirection = value;
     }
-
-
-    private void OnEnable()
-    {
-        _updater.OnUpdate += ComputeUpdate;
-        _updater.OnFixedUpdate += ComputeFixedUpdate;
-        _inputsHandler.OnJump += RaiseJumpInputPressed;
-    }
     
-    private void OnDisable()
+    
+    private void OnDestroy()
     {
-        _updater.OnUpdate -= ComputeUpdate;
-        _updater.OnFixedUpdate -= ComputeFixedUpdate;
         _inputsHandler.OnJump -= RaiseJumpInputPressed;
     }
 
-    private void Start()
+    public void Init(PlayerInputsHandler inputs)
     {
-        _stateMachine.Init(this);
-        _stateMachine.ChangeState(StateTypes.Idle);
+        _inputsHandler = inputs;
+        _inputsHandler.OnJump += RaiseJumpInputPressed;
     }
-        
-    private void ComputeFixedUpdate()
+    
+    public void ComputeFixedUpdate()
     {
         ComputeVelocity();
     }
-    private void ComputeUpdate()
+    public void ComputeUpdate()
     {
-        _stateMachine.StateMachineUpdate();
         ComputeInputs();
         ComputeOrientation();
     }
@@ -72,7 +63,10 @@ public class PlayerPhysic : MonoBehaviour, IBasicMover
 
     private void ComputeOrientation()
     {
-        float targetAngle = Mathf.Atan2(InputDirection.x, InputDirection.y) * Mathf.Rad2Deg;
+        if (InputDirection != Vector2.zero)
+            _lastNonNullDirection = InputDirection;
+        
+        float targetAngle = Mathf.Atan2(_lastNonNullDirection.x, _lastNonNullDirection.y) * Mathf.Rad2Deg;
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, targetAngle, 0f));
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
@@ -92,11 +86,4 @@ public class PlayerPhysic : MonoBehaviour, IBasicMover
 
     public void RaiseJumpInputPressed() => OnJumpInputPressed?.Invoke();
 
-#if UNITY_EDITOR
-    private void OnGUI()
-    {
-        GUILayout.Label($"Player State: {_stateMachine.CurrentStateType}");
-        GUILayout.Label($"Player speed: {Speed}");
-    }
-#endif
 }
