@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class PlayerBrain : MonoBehaviour, IHealth
+public class EnemyBrain : MonoBehaviour, IHealth
 {
-    [SerializeField] private Updater _updater;
-
     private float health;
     private float maxHealth;
 
