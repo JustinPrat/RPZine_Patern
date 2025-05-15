@@ -14,12 +14,13 @@ public class PlayerPhysic : MonoBehaviour, IBasicMover
     private Vector2 _lookDirection;
     private Vector2 _inputDirection;
     private Vector2 _lastNonNullDirection;
+    private float _currentSpeed;
 
     public event Action OnJumpInputPressed;
+    public event Action<float> OnSpeedUpdated;
+
     
     public float GravityScale { get; set; }
-    public float Speed { get; set; }
-
     public Vector2 LinearVelocity => _rb.linearVelocity;
     public Vector2 LookDirection
     {
@@ -31,17 +32,26 @@ public class PlayerPhysic : MonoBehaviour, IBasicMover
         get => _inputDirection;
         set => _inputDirection = value;
     }
+    public float Speed
+    {
+        get => _currentSpeed;
+        set
+        {
+            _currentSpeed = value;
+            OnSpeedUpdated?.Invoke(_currentSpeed);
+        }
+    }
     
     
     private void OnDestroy()
     {
-        _inputsHandler.OnJump -= RaiseJumpInputPressed;
+        _inputsHandler.OnJumpInputPressed -= RaiseJumpInputPressedInputPressed;
     }
 
     public void Init(PlayerInputsHandler inputs)
     {
         _inputsHandler = inputs;
-        _inputsHandler.OnJump += RaiseJumpInputPressed;
+        _inputsHandler.OnJumpInputPressed += RaiseJumpInputPressedInputPressed;
     }
     
     public void ComputeFixedUpdate()
@@ -84,6 +94,6 @@ public class PlayerPhysic : MonoBehaviour, IBasicMover
         Debug.Log(_rb.linearVelocity);
     }
 
-    public void RaiseJumpInputPressed() => OnJumpInputPressed?.Invoke();
+    public void RaiseJumpInputPressedInputPressed() => OnJumpInputPressed?.Invoke();
 
 }

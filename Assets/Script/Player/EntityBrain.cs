@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EntityBrain : MonoBehaviour, IHealth
 {
-    [Inject] protected readonly Updater updater;
+    [SerializeField] protected Updater _updater;
 
     protected float health;
     protected float maxHealth;
@@ -19,5 +19,6 @@ public class EntityBrain : MonoBehaviour, IHealth
     public void TakeDamage(float amount)
     {
         health = Mathf.Clamp(health - amount, 0, maxHealth);
+        Debug.Log($"Take {amount} damage");
     }
 }

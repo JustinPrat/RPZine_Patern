@@ -7,20 +7,20 @@ public class PlayerInputsHandler : MonoBehaviour
     private InputSystem_Actions _actions;
 
     private InputAction _move;
-    private InputAction _look;
+    private InputAction _reload;
     private InputAction _fart;
     private InputAction _jump;
 
     public Vector2 MoveDirection => _move.ReadValue<Vector2>();
-    public Vector2 LookDirection => _look.ReadValue<Vector2>();
-    public event Action OnFart;
-    public event Action OnJump;
+    public event Action OnReloadInputPressed;
+    public event Action OnFartInputPressed;
+    public event Action OnJumpInputPressed;
 
     private void Awake()
     {
         _actions = new InputSystem_Actions();
         _move = _actions.Player.Move;
-        _look = _actions.Player.Look;
+        _reload = _actions.Player.Reload;
         _fart = _actions.Player.Prout;
         _jump = _actions.Player.Jump;
     }
@@ -30,7 +30,7 @@ public class PlayerInputsHandler : MonoBehaviour
         EnableMove();
         EnableJump();
         EnableFart();
-        EnableLook();
+        EnableReload();
     }
 
     private void OnDisable()
@@ -38,7 +38,7 @@ public class PlayerInputsHandler : MonoBehaviour
         DisableMove();
         DisableFart();
         DisableJump();
-        DisableLook();
+        DisableReload();
     }
 
     #region Move
@@ -53,16 +53,20 @@ public class PlayerInputsHandler : MonoBehaviour
     }
     #endregion
 
-    #region Look
-    private void EnableLook()
+    #region Reload
+    private void EnableReload()
     {
-        _look.Enable();
+        _reload.Enable();
+        _reload.started += RaiseReload;
     }
     
-    private void DisableLook()
+    private void DisableReload()
     {
-        _look.Enable();
+        _reload.Disable();
+        _reload.started -= RaiseReload;
     }
+
+    private void RaiseReload(InputAction.CallbackContext _) => OnReloadInputPressed?.Invoke();
     #endregion
 
     #region Fart
@@ -79,7 +83,7 @@ public class PlayerInputsHandler : MonoBehaviour
         _fart.started -= RaiseOnFire;
     }
 
-    private void RaiseOnFire(InputAction.CallbackContext _) => OnFart?.Invoke();
+    private void RaiseOnFire(InputAction.CallbackContext _) => OnFartInputPressed?.Invoke();
 
     #endregion
 
@@ -98,7 +102,7 @@ public class PlayerInputsHandler : MonoBehaviour
     }
 
     
-    private void RaiseOnJump(InputAction.CallbackContext _) => OnJump?.Invoke();
+    private void RaiseOnJump(InputAction.CallbackContext _) => OnJumpInputPressed?.Invoke();
 
     #endregion
 

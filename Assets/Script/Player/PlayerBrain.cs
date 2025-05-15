@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class PlayerBrain : EntityBrain
 {
-    [SerializeField] private Updater _updater;
     [SerializeField] private PlayerPhysic _playerPhysic;
     [SerializeField] private PlayerStateMachine _stateMachine;
     [SerializeField] private PlayerInputsHandler _inputsHandler;
+    [SerializeField] private FartBehaviour _fartBehaviour;
+    [SerializeField] private AnimationHandler _animationHandler;
     
 
     private void Awake()
@@ -22,11 +23,12 @@ public class PlayerBrain : EntityBrain
         _updater.OnUpdate -= PlayerUpdate;
         _updater.OnFixedUpdate -= PlayerFixedUpdate;
     }
-
     private void InitComponents()
     {
         _stateMachine.Init(_playerPhysic);
         _playerPhysic.Init(_inputsHandler);
+        _fartBehaviour.Init(_inputsHandler);
+        _animationHandler.Init(_fartBehaviour, _playerPhysic);
     }
 
     private void Start()
@@ -44,6 +46,7 @@ public class PlayerBrain : EntityBrain
     {
         _playerPhysic.ComputeUpdate();
         _stateMachine.ComputeUpdate();
+        _fartBehaviour.ComputeUpdate();
     }
     
     
@@ -52,6 +55,9 @@ public class PlayerBrain : EntityBrain
     {
         GUILayout.Label($"Player State: {_stateMachine.CurrentStateType}");
         GUILayout.Label($"Player speed: {_playerPhysic.Speed}");
+        GUILayout.Label($"Fart amount: {_fartBehaviour.CurrentFartAmount}");
+        GUILayout.Label($"Fart reload: {_fartBehaviour.CurrentReloadTime}");
+        GUILayout.Label($"Fart cooldown: {_fartBehaviour.CurrentCoolDownTime}");
     }
 #endif
 }

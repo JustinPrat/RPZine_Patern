@@ -9,7 +9,7 @@ public interface IJumper: IJumpRequester, IJumpExecuter, IGravityConcerned
 public interface IJumpRequester
 {
     public event Action OnJumpInputPressed ;
-    public void RaiseJumpInputPressed();    
+    public void RaiseJumpInputPressedInputPressed();    
 }
 
 public interface IJumpExecuter: IVelocityReader

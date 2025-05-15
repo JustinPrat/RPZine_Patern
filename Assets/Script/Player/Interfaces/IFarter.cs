@@ -3,6 +3,9 @@ using System;
 public interface IFarter
 {
     public void Fart();
-    public event Action OnFartInputPressed;
+    public void Reload();
+    public event Action OnFart;
+    public event Action OnReload;
     public void RaiseFartInputPressed();
+    public void RaiseReloadInputPressed();
 }
