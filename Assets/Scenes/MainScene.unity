@@ -24867,11 +24867,111 @@ PrefabInstance:
       propertyPath: _drawDebugGizmo
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9115170152858762924, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115170152858762924, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4818344387921768272, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
+    - {fileID: 2755339349131118951, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6331558144665418028, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 164211095928399048}
+    - targetCorrespondingSourceObject: {fileID: 6331558144665418028, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 164211095928399047}
+    - targetCorrespondingSourceObject: {fileID: 6331558144665418028, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 164211095928399046}
   m_SourcePrefab: {fileID: 100100000, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
+--- !u!1 &164211095928399045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6331558144665418028, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
+  m_PrefabInstance: {fileID: 164211095928399044}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &164211095928399046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164211095928399045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26260f9073f3e6d41ae22ba86858573f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &164211095928399047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164211095928399045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc57bd47ce6136a46be83d7c8d71bc92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _updater: {fileID: 1197885036}
+  _rb: {fileID: 164211095928399049}
+  _stateMachine:
+    _jumpState:
+      _jumpDuration: 1
+      _jumpHeight: 1
+    _moveState:
+      _maxSpeed: 2
+      _accelerationTime: 0.2
+      _accelerationCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  _inputsHandler: {fileID: 164211095928399046}
+--- !u!114 &164211095928399048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164211095928399045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3adeb23111dc724a8b51f69d21bbabb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _updater: {fileID: 1197885036}
+--- !u!54 &164211095928399049 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 9115170152858762924, guid: 8b89fdb0c71dd438b9b7b0ef242463bc, type: 3}
+  m_PrefabInstance: {fileID: 164211095928399044}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &316894929158137843
 PrefabInstance:
   m_ObjectHideFlags: 0

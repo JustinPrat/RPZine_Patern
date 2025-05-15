@@ -49,52 +49,54 @@ public class PlayerInputsHandler : MonoBehaviour
     
     private void DisableMove()
     {
-        _move.Enable();
+        _move.Disable();
     }
     #endregion
 
     #region Look
-    private void DisableLook()
+    private void EnableLook()
     {
         _look.Enable();
     }
     
-    private void EnableLook()
+    private void DisableLook()
     {
         _look.Enable();
     }
     #endregion
 
     #region Fart
-
-    private void DisableFart()
+    
+    private void EnableFart()
     {
         _fart.Enable();
         _fart.started += RaiseOnFire;
     }
     
-    private void EnableFart()
+    private void DisableFart()
     {
         _fart.Enable();
         _fart.started -= RaiseOnFire;
     }
+
     private void RaiseOnFire(InputAction.CallbackContext _) => OnFart?.Invoke();
 
     #endregion
 
     #region Jump
-
-    private void DisableJump()
+    
+    private void EnableJump()
     {
         _jump.Enable();
         _jump.started += RaiseOnJump;
     }
     
-    private void EnableJump()
+    private void DisableJump()
     {
         _jump.Enable();
         _jump.started -= RaiseOnJump;
     }
+
     
     private void RaiseOnJump(InputAction.CallbackContext _) => OnJump?.Invoke();
 
