@@ -24,12 +24,16 @@ public class FartBehaviour : MonoBehaviour, IFarter
     
     public event Action OnFart;
     public event Action OnReload;
+    public event Action OnReloadComplete;
+    
     public UnityEvent OnFartUnityEvent;
     public UnityEvent OnReloadUnityEvent;
 
+    public int FartAmount => _fartAmount;
     public int CurrentFartAmount => _currentFartAmount;
     public float CurrentReloadTime => _currentReloadTime;
     public float CurrentCoolDownTime => _currentCoolDownTime;
+
 
     public void Init(PlayerInputsHandler inputs)
     {
@@ -38,7 +42,7 @@ public class FartBehaviour : MonoBehaviour, IFarter
         _inputs.OnFartInputPressed += Fart;
         _inputs.OnReloadInputPressed += Reload;
 
-        _currentFartAmount = _fartAmount;
+        _currentFartAmount = FartAmount;
     }
 
     private void OnDestroy()
@@ -62,8 +66,9 @@ public class FartBehaviour : MonoBehaviour, IFarter
         if (CurrentReloadTime > _fartReloadTime)
         {
             _isReloading = false;
-            _currentFartAmount = _fartAmount;
+            _currentFartAmount = FartAmount;
             _currentReloadTime = 0;
+            RaiseReloadComplete();
         }
     }
     
@@ -112,7 +117,8 @@ public class FartBehaviour : MonoBehaviour, IFarter
         RaiseReloadInputPressed();
     }
 
-    
+
+
     public void RaiseFartInputPressed()
     {
         OnFart?.Invoke();
@@ -124,6 +130,12 @@ public class FartBehaviour : MonoBehaviour, IFarter
         OnReload?.Invoke();
         OnReloadUnityEvent?.Invoke();
     }
+
+    public void RaiseReloadComplete()
+    {
+        OnReloadComplete?.Invoke();
+    }
+
 
     private void OnDrawGizmos()
     {
