@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 7707143747462675163}
   - component: {fileID: 7145659492736038565}
   - component: {fileID: 5074235655215546373}
+  - component: {fileID: 1757355159187692284}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Untagged
@@ -686,6 +687,7 @@ MonoBehaviour:
   - rid: 4876611493652595143
   - rid: 4876611493652595149
   - rid: 4876611515737703041
+  - rid: 4876611517821223359
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -698,7 +700,7 @@ MonoBehaviour:
           m_Value0: 1
           m_Value1: 0
         Name: Self
-        m_Value: {fileID: 1576414091576977766}
+        m_Value: {fileID: 0}
     - rid: 4876611493652595143
       type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -725,6 +727,14 @@ MonoBehaviour:
           m_Value1: 16978510508060536734
         Name: SelfAnimator
         m_Value: {fileID: 4263819368216379867}
+    - rid: 4876611517821223359
+      type: {class: 'BlackboardVariable`1[[HealthComponent, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10350889044395366128
+          m_Value1: 12819235760557012420
+        Name: SelfHealth
+        m_Value: {fileID: 1757355159187692284}
 --- !u!114 &5074235655215546373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,6 +747,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c1ff4d617b46e49a5dbca8fa15f8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthComponent: {fileID: 1757355159187692284}
+--- !u!114 &1757355159187692284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576414091576977766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8808fa55d4712e46becd6cac81ec16e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &1670261768751160320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,6 +2013,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6968540497758581738}
   - component: {fileID: 3541420137197661152}
+  - component: {fileID: 4614296130592988821}
   m_Layer: 6
   m_Name: HitBox
   m_TagString: Untagged
@@ -2034,6 +2059,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4614296130592988821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485207361959228840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5f17ee73d9cc842ae05c717a587e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 1757355159187692284}
 --- !u!1 &6660159631773632989
 GameObject:
   m_ObjectHideFlags: 0

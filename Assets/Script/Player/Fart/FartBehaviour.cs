@@ -28,6 +28,7 @@ public class FartBehaviour : MonoBehaviour, IFarter
     
     public UnityEvent OnFartUnityEvent;
     public UnityEvent OnReloadUnityEvent;
+    public UnityEvent OnReloadCompleteUnityEvent;
 
     public int FartAmount => _fartAmount;
     public int CurrentFartAmount => _currentFartAmount;
@@ -134,6 +135,7 @@ public class FartBehaviour : MonoBehaviour, IFarter
     public void RaiseReloadComplete()
     {
         OnReloadComplete?.Invoke();
+        OnReloadCompleteUnityEvent?.Invoke();
     }
 
 

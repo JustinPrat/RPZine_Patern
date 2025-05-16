@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour, IHealth
 {
     [SerializeField] private CanvasGroup _group;
     [SerializeField] protected float maxHealth;
-    protected float health;
+    protected float health = 100;
     
     public event Action OnTakeDamage;
     public event Action OnHeal;
@@ -27,7 +28,6 @@ public class HealthComponent : MonoBehaviour, IHealth
 
     public void Death()
     {
-        gameObject.SetActive(false);
         health = 0;
         OnDeath?.Invoke();
 
