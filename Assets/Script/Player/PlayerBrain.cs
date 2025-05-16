@@ -22,17 +22,26 @@ public class PlayerBrain : EntityBrain
         InitComponents();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            _healthComponent.TakeDamage(50);
+        }
+    }
+
     private void OnDestroy()
     {
         _updater.OnUpdate -= PlayerUpdate;
         _updater.OnFixedUpdate -= PlayerFixedUpdate;
     }
-    private void InitComponents()
+   protected override void InitComponents()
     {
+        base.InitComponents();
         _stateMachine.Init(_playerPhysic);
         _playerPhysic.Init(_inputsHandler);
         _fartBehaviour.Init(_inputsHandler);
-        _animationHandler.Init(_fartBehaviour, _playerPhysic);
+        _animationHandler.Init(_fartBehaviour, _playerPhysic, _healthComponent);
         _healthUi.Init(_healthComponent);
         _fartUi.Init(_fartBehaviour);
     }

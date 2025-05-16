@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour, IHealth
 {
+    [SerializeField] private CanvasGroup _group;
     [SerializeField] protected float maxHealth;
     protected float health;
     
@@ -13,6 +14,11 @@ public class HealthComponent : MonoBehaviour, IHealth
     public float Health { get { return health; } }
     public float MaxHealth { get { return maxHealth; } }
 
+    public void Init()
+    {
+        health = maxHealth;
+    }
+    
     public void Heal(float amount)
     {
         health = Mathf.Clamp(health + amount, 0, maxHealth);
@@ -22,7 +28,14 @@ public class HealthComponent : MonoBehaviour, IHealth
     public void Death()
     {
         gameObject.SetActive(false);
+        health = 0;
         OnDeath?.Invoke();
+
+        //Nul à chier mais y'a plus le temps
+        if (_group)
+        {
+            _group.alpha = 1;
+        }
     }
     public void TakeDamage(float amount)
     {
