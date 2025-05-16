@@ -1,4 +1,4 @@
-using UnityEngine;
+using System;
 
 public interface IHealth
 {
@@ -7,4 +7,9 @@ public interface IHealth
 
     public abstract void TakeDamage(float amount);
     public abstract void Heal(float amount);
+    public abstract void Death();
+
+    public event Action OnTakeDamage;
+    public event Action OnHeal;
+    public event Action OnDeath;
 }

@@ -4,14 +4,14 @@ using UnityEngine;
 public class AnimationHandler : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    private FartBehaviour _fartBehaviour;
+    private IFarter _fartBehaviour;
     private ISpeedReader _speedReader;
 
     private Action OnFartHandeler => () => SetAnimatorTrigger("Attack");
     private Action OnReloadHandeler => () => SetAnimatorTrigger("Reload");
     private Action<float> OnSpeedUpdateHandeler => (speed) => SetAnimatorFloat("WalkSpeed", speed);
     
-    public void Init(FartBehaviour fartBehaviour, ISpeedReader speedReader)
+    public void Init(IFarter fartBehaviour, ISpeedReader speedReader)
     {
         _fartBehaviour = fartBehaviour;
         _speedReader = speedReader;

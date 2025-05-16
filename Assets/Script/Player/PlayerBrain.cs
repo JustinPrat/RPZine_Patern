@@ -3,12 +3,16 @@ using UnityEngine;
 
 public class PlayerBrain : EntityBrain
 {
+    [Header("Logic")]
     [SerializeField] private PlayerPhysic _playerPhysic;
     [SerializeField] private PlayerStateMachine _stateMachine;
     [SerializeField] private PlayerInputsHandler _inputsHandler;
     [SerializeField] private FartBehaviour _fartBehaviour;
     [SerializeField] private AnimationHandler _animationHandler;
     
+    [Header("UI")] 
+    [SerializeField] private HealthUi _healthUi;
+    [SerializeField] private FartUi _fartUi;
 
     private void Awake()
     {
@@ -29,6 +33,8 @@ public class PlayerBrain : EntityBrain
         _playerPhysic.Init(_inputsHandler);
         _fartBehaviour.Init(_inputsHandler);
         _animationHandler.Init(_fartBehaviour, _playerPhysic);
+        _healthUi.Init(_healthComponent);
+        _fartUi.Init(_fartBehaviour);
     }
 
     private void Start()
@@ -37,16 +43,19 @@ public class PlayerBrain : EntityBrain
         _stateMachine.ChangeState(StateTypes.Idle);
     }
 
-    private void PlayerFixedUpdate()
+    protected override void PlayerFixedUpdate()
     {
+        base.PlayerFixedUpdate();
         _playerPhysic.ComputeFixedUpdate();
     }
 
-    private void PlayerUpdate()
+    protected override void PlayerUpdate()
     {
+        base.PlayerUpdate();
         _playerPhysic.ComputeUpdate();
         _stateMachine.ComputeUpdate();
         _fartBehaviour.ComputeUpdate();
+        _healthUi.ComputeUpdate();
     }
     
     
