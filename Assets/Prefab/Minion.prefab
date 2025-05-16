@@ -685,6 +685,7 @@ MonoBehaviour:
   - rid: 4876611493652595137
   - rid: 4876611493652595143
   - rid: 4876611493652595149
+  - rid: 4876611515737703041
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -716,6 +717,14 @@ MonoBehaviour:
           m_Value1: 16056967508599955695
         Name: Player
         m_Value: {fileID: 0}
+    - rid: 4876611515737703041
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14223578525952816810
+          m_Value1: 16978510508060536734
+        Name: SelfAnimator
+        m_Value: {fileID: 4263819368216379867}
 --- !u!114 &5074235655215546373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,7 +737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c1ff4d617b46e49a5dbca8fa15f8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _updater: {fileID: 0}
 --- !u!1 &1670261768751160320
 GameObject:
   m_ObjectHideFlags: 0
