@@ -41,6 +41,14 @@ public class PlayerInputsHandler : MonoBehaviour
         DisableReload();
     }
 
+    public void KillInput()
+    {
+        DisableMove();
+        DisableFart();
+        DisableJump();
+        DisableReload();
+    }
+
     #region Move
     private void EnableMove()
     {

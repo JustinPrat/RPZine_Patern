@@ -21,15 +21,7 @@ public class PlayerBrain : EntityBrain
         
         InitComponents();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            _healthComponent.TakeDamage(50);
-        }
-    }
-
+    
     private void OnDestroy()
     {
         _updater.OnUpdate -= PlayerUpdate;
