@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EntityBrain : MonoBehaviour, IHealth
 {
-    [SerializeField] protected Updater _updater;
+    [Inject] protected readonly Updater _updater;
 
     protected float health;
     protected float maxHealth;
